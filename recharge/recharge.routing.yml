@@ -1,0 +1,7 @@
+recharge.recharge:
+  path: '/recharge'
+  defaults:
+    _form: '\Drupal\recharge\Form\Recharge'
+    _title: 'Recharge'
+  requirements:
+    _permission: 'access content'
