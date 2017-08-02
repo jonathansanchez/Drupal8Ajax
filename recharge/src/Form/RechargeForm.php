@@ -7,7 +7,7 @@ use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
-class Recharge extends FormBase
+class RechargeForm extends FormBase
 {
     const MIN_AMOUNT = 500;
     const MAX_AMOUNT = 50000;
