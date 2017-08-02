@@ -1,0 +1,8 @@
+services:
+  recharge.blayernumberrepository:
+    class: Drupal\recharge\Infrastructure\Rest\BlayerNumberRepository
+    arguments: ['@http_client']
+
+  recharge.rechargenumberusecase:
+    class: Drupal\recharge\Domain\Services\RechargeNumberUseCase
+    arguments: ['@recharge.blayernumberrepository']
