@@ -6,3 +6,7 @@ services:
   recharge.rechargenumberusecase:
     class: Drupal\recharge\Domain\Services\RechargeNumberUseCase
     arguments: ['@recharge.blayernumberrepository']
+
+  recharge.findanumberusecase:
+    class: Drupal\recharge\Domain\Services\FindANumberUseCase
+    arguments: ['@recharge.blayernumberrepository']
