@@ -175,10 +175,11 @@ class RechargeForm extends FormBase
      */
     private function verifiedIsValidNumber($number)
     {
-        //Some service that validate the phone number.
-        if ($number) {
-            return true;
+        $existsNumber = Drupal::service('recharge.FindANumberUseCase')->execute($number);
+        if (empty($existsNumber)) {
+            return false;
         }
-        return false;
+
+        return true;
     }
 }
