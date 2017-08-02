@@ -5,10 +5,11 @@ namespace Drupal\recharge\Infrastructure\Rest;
 use Drupal\recharge\Domain\Entity\Number;
 use Drupal\recharge\Domain\Repository\NumberRepository;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class BlayerNumberRepository implements NumberRepository
 {
-    const URL = 'https://api.github.com/';
+    const URL = 'https://api.example.com/';
 
     /** @var Client */
     private $client;
@@ -28,8 +29,36 @@ class BlayerNumberRepository implements NumberRepository
      */
     public function recharge(Number $number)
     {
-        \Drupal::logger('recharge')->notice("Pasa con monto: " . $number->getAmount() . " y msisdn: " . $number->getMsisdn());
+        try {
+            $this
+                ->client
+                ->request('POST', self::URL . 'phone/' . $number->getMsisdn(), [
+                    'json' => ['amount' => $number->getAmount()]
+                ]);
 
-        return true;
+            return true;
+        } catch (RequestException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Return a phone number
+     *
+     * @param int $msisdn
+     *
+     * @return object|bool
+     */
+    public function findOneByMsisdn(int $msisdn)
+    {
+        try {
+            $response = $this
+                ->client
+                ->request('GET', self::URL . 'phone/' . $msisdn);
+
+            return json_decode($response->getBody());
+        } catch (RequestException $e) {
+            return false;
+        }
     }
 }
