@@ -170,6 +170,9 @@ class RechargeForm extends FormBase
     private function verifiedIsValidNumber($number)
     {
         //Some service that validate the phone number.
+        if ($number) {
+            return true;
+        }
         return false;
     }
 }
