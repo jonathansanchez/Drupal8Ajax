@@ -21,4 +21,13 @@ interface NumberRepository
      * @return bool true|false
      */
     public function recharge(Number $number);
+
+    /**
+     * Return a phone number
+     *
+     * @param int $msisdn
+     *
+     * @return object|bool
+     */
+    public function findOneByMsisdn(int $msisdn);
 }
