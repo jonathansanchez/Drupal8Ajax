@@ -1,7 +1,3 @@
-# Drupal DDD Module
+# Drupal 8 Module AJAX
 
-This is a simple Drupal 8 module to uncouple code and framework based on DDD.
-
-1. Implements Domain Services (like a use case).
-2. Dependency Inversion Pattern.
-2. Dependency Inversion Principle (SOLID).
+This is a simple Drupal 8 module that use AJAX.
