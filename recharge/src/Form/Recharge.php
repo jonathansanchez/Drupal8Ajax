@@ -2,10 +2,8 @@
 
 namespace Drupal\recharge\Form;
 
-//use Drupal;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
-//use Drupal\Core\Ajax\PrependCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -98,12 +96,9 @@ class Recharge extends FormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $response = new AjaxResponse();
-        //$status_messages = ['#type' => 'status_messages'];
-        //$messages = Drupal::service('renderer')->renderRoot($status_messages);
         if ($form_state->getErrors()) {
             return $response->addCommand(
                 new HtmlCommand('#recharge-form', $form)
-                //new PrependCommand('.highlighted', $messages)
             );
         }
 
