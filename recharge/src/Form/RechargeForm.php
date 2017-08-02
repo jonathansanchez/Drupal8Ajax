@@ -2,6 +2,7 @@
 
 namespace Drupal\recharge\Form;
 
+use Drupal;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\FormBase;
@@ -101,6 +102,11 @@ class RechargeForm extends FormBase
                 new HtmlCommand('#recharge-form', $form)
             );
         }
+
+        Drupal::service('recharge.rechargenumberusecase')->execute(
+            $form_state->getValue('amount'),
+            $form_state->getValue('msisdn')
+        );
 
         return $response->addCommand(
             new HtmlCommand('#recharge-form', 'Recharged')
