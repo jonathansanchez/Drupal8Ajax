@@ -104,8 +104,8 @@ class RechargeForm extends FormBase
         }
 
         Drupal::service('recharge.rechargenumberusecase')->execute(
-            $form_state->getValue('amount'),
-            $form_state->getValue('msisdn')
+            (int) $form_state->getValue('amount'),
+            (int) $form_state->getValue('msisdn')
         );
 
         return $response->addCommand(

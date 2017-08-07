@@ -2,6 +2,9 @@
 
 namespace Drupal\recharge\Domain\Entity;
 
+use Drupal\recharge\Domain\VO\Amount;
+use Drupal\recharge\Domain\VO\PhoneNumber;
+
 class Number
 {
     /** @var  int $amount */
@@ -9,13 +12,13 @@ class Number
     /** @var  int $msisdn */
     private $msisdn;
 
-    public function __construct(int $amount, int $msisdn)
+    public function __construct(Amount $amount, PhoneNumber $msisdn)
     {
         $this->setAmount($amount);
         $this->setMsisdn($msisdn);
     }
 
-    private function setAmount(int $amount)
+    private function setAmount($amount)
     {
         $this->amount = $amount;
     }
@@ -25,7 +28,7 @@ class Number
         return $this->amount;
     }
 
-    private function setMsisdn(int $msisdn)
+    private function setMsisdn($msisdn)
     {
         $this->msisdn = $msisdn;
     }
