@@ -1,7 +1,7 @@
 {
     "name": "jonathansanchez/Drupal8Ajax",
     "type": "drupal-module",
-    "description": "Faker is a PHP library that generates fake data for you.",
+    "description": "This is a simple Drupal 8 module that use AJAX.",
     "keywords": ["drupal", "ddd", "php"],
     "license": "MIT",
     "authors": [
