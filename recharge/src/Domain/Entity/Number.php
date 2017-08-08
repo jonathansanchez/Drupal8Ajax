@@ -7,9 +7,9 @@ use Drupal\recharge\Domain\VO\PhoneNumber;
 
 class Number
 {
-    /** @var  int $amount */
+    /** @var  Amount $amount */
     private $amount;
-    /** @var  int $msisdn */
+    /** @var  PhoneNumber $msisdn */
     private $msisdn;
 
     public function __construct(Amount $amount, PhoneNumber $msisdn)
