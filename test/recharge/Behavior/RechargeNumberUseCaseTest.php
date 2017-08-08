@@ -20,10 +20,10 @@ class RechargeNumberUseCaseTest extends TestCase
         $phoneNumber = PhoneNumberStub::random();
         $number      = NumberStub::create($amount, $phoneNumber);
 
-        $expected = (new RechargeNumberUseCase(
-            new WithValuesRepository($number)
-        ))->execute(1, 1);
-
-        $this->assertEquals($number, $expected);
+        $this->assertTrue(
+            (new RechargeNumberUseCase(
+                new WithValuesRepository($number)
+            ))->execute(1, 1)
+        );
     }
 }
