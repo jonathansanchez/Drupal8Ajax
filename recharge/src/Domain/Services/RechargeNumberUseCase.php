@@ -24,10 +24,8 @@ class RechargeNumberUseCase
             PhoneNumber::anotherValue($msisdn)
         );
 
-        $this
+        return $this
             ->numberRepository
             ->recharge($number);
-
-        return $number;
     }
 }
