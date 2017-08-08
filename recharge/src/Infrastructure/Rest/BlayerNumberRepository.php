@@ -32,8 +32,8 @@ class BlayerNumberRepository implements NumberRepository
         try {
             $this
                 ->client
-                ->request('POST', self::URL . 'phone/' . $number->getMsisdn(), [
-                    'json' => ['amount' => $number->getAmount()]
+                ->request('POST', self::URL . 'phone/' . $number->getMsisdn()->value(), [
+                    'json' => ['amount' => $number->getAmount()->value()]
                 ]);
 
             return true;
