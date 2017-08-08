@@ -96,19 +96,45 @@ class RechargeForm extends FormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $response = new AjaxResponse();
         if ($form_state->getErrors()) {
-            return $response->addCommand(
-                new HtmlCommand('#recharge-form', $form)
-            );
+            return $this->errorResponse($form);
         }
 
-        Drupal::service('recharge.rechargenumberusecase')->execute(
+        $isRecharged = Drupal::service('recharge.rechargenumberusecase')->execute(
             (int) $form_state->getValue('amount'),
             (int) $form_state->getValue('msisdn')
         );
 
-        return $response->addCommand(
+        if (empty($isRecharged)) {
+            return $this->errorResponse($form);
+        }
+
+        return $this->successResponse();
+    }
+
+    /**
+     * Return form with errors.
+     *
+     * @param array $form
+     * @return AjaxResponse
+     */
+    private function errorResponse(array &$form)
+    {
+        drupal_set_message("The number has not been charged.", "error");
+        return (new AjaxResponse())->addCommand(
+            new HtmlCommand('#recharge-form', $form)
+        );
+    }
+
+    /**
+     * Return success form.
+     *
+     * @param none
+     * @return AjaxResponse
+     */
+    private function successResponse()
+    {
+        return (new AjaxResponse())->addCommand(
             new HtmlCommand('#recharge-form', 'Recharged')
         );
     }
