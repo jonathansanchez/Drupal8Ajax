@@ -8,7 +8,7 @@ final class AmountStub
 {
     public static function create(int $amount)
     {
-        return Amount::getAmount($amount);
+        return Amount::anotherValue($amount);
     }
 
     public static function random()

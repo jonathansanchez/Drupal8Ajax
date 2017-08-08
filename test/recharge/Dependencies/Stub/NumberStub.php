@@ -10,7 +10,6 @@ final class NumberStub
 {
     public static function create(Amount $amount, PhoneNumber $phoneNumber)
     {
-        //return new Number($amount->amount(), $phoneNumber->phoneNumber());
         return new Number($amount, $phoneNumber);
     }
 

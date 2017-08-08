@@ -8,7 +8,7 @@ final class PhoneNumberStub
 {
     public static function create(int $phoneNumber)
     {
-        return PhoneNumber::getPhoneNumber($phoneNumber);
+        return PhoneNumber::anotherValue($phoneNumber);
     }
 
     public static function random()
