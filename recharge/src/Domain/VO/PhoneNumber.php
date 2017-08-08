@@ -7,13 +7,18 @@ class PhoneNumber
     /** @var  */
     private $phoneNumber;
 
-    public function __construct(int $phoneNumber)
+    private function __construct($aPhoneNumber)
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->phoneNumber = $aPhoneNumber;
     }
 
-    public static function getPhoneNumber($phoneNumber): PhoneNumber
+    static public function anotherValue(int $aPhoneNumber): PhoneNumber
     {
-        return new self($phoneNumber);
+        return new self($aPhoneNumber);
+    }
+
+    public function value(): int
+    {
+        return $this->phoneNumber;
     }
 }
