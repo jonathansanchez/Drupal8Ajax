@@ -2,16 +2,36 @@
 
 namespace Drupal\recharge\Form;
 
-use Drupal;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\recharge\Event\RechargeEvent;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RechargeForm extends FormBase
 {
     const MIN_AMOUNT = 500;
     const MAX_AMOUNT = 50000;
+
+    protected $eventDispatcher;
+
+    /**
+     * Class constructor.
+     */
+    public function __construct($eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function create(ContainerInterface $container) {
+        return new static(
+            $container->get('event_dispatcher')
+        );
+    }
 
     /**
      * {@inheritdoc}
@@ -100,7 +120,7 @@ class RechargeForm extends FormBase
             return $this->errorResponse($form);
         }
 
-        $isRecharged = Drupal::service('recharge.rechargenumberusecase')->execute(
+        $isRecharged = \Drupal::service('recharge.rechargenumberusecase')->execute(
             (int) $form_state->getValue('amount'),
             (int) $form_state->getValue('msisdn')
         );
@@ -108,6 +128,9 @@ class RechargeForm extends FormBase
         if (empty($isRecharged)) {
             return $this->errorResponse($form);
         }
+
+        $event = new RechargeEvent($isRecharged);
+        $this->eventDispatcher->dispatch(RechargeEvent::NAME, $event);
 
         return $this->successResponse();
     }
@@ -201,7 +224,7 @@ class RechargeForm extends FormBase
      */
     private function verifiedIsValidNumber($number)
     {
-        $existsNumber = Drupal::service('recharge.FindANumberUseCase')->execute($number);
+        $existsNumber = \Drupal::service('recharge.FindANumberUseCase')->execute($number);
         if (empty($existsNumber)) {
             return false;
         }
