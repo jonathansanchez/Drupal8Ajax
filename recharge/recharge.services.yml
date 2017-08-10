@@ -10,3 +10,8 @@ services:
   recharge.findanumberusecase:
     class: Drupal\recharge\Domain\Services\FindANumberUseCase
     arguments: ['@recharge.blayernumberrepository']
+
+  recharge.rechargesubscriber:
+    class: Drupal\recharge\EventSubscriber\RechargeSubscriber
+    tags:
+      - { name: event_subscriber }
